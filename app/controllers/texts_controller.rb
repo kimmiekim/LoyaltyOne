@@ -1,11 +1,15 @@
 class TextsController < ApplicationController
   def index
+    # /texts?text=sometext
+      render json: { text: params[:text] }
   end
 
   def new
   end
 
+  # POST /texts
   def create
+    render plain: params[:text]
   end
 
   def show
@@ -14,6 +18,7 @@ class TextsController < ApplicationController
   def edit
   end
 
+  # PUT /texts
   def update
   end
 

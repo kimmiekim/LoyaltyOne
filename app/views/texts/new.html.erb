@@ -1,2 +1,6 @@
 <h1>Texts#new</h1>
-<p>Find me in app/views/texts/new.html.erb</p>
+
+<%= form_tag "/texts" do %>
+  <%= text_field_tag "text" %>
+  <%= submit_tag "submit" %>
+<% end %>
