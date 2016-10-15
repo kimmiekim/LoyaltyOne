@@ -3,8 +3,9 @@ require 'test_helper'
 class TextsControllerTest < ActionController::TestCase
   test "should get index" do
     testString = "testing"
-    get :index, params: { text: testString}
-    assert_response :success, "test broken"
+    get :index, { text: testString }
+    assert_response :success
+    assert_equal testString, JSON.parse(@response.body)["text"]
   end
 
 
