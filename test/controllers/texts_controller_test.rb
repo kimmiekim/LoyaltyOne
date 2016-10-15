@@ -2,8 +2,8 @@ require 'test_helper'
 
 class TextsControllerTest < ActionController::TestCase
   test "should get index" do
-    testString = "testing"
-    get :index, params: { text: testString}
+    # testString = "testing"
+    get :index, params: { text: "testing" }
     assert_response :success, "test broken"
   end
 
