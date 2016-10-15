@@ -1,7 +1,3 @@
-require 'test_helper'
-
-class TextsControllerTest < ActionController::TestCase
-  test "index should receive string as param and return as json" do
     testString = "testing"
     get :index, { text: testString }
     assert_response :success
