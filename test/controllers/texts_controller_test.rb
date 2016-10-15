@@ -1,42 +1,18 @@
 require 'test_helper'
 
 class TextsControllerTest < ActionController::TestCase
-  test "should get index" do
+  test "index should receive string as param and return as json" do
     testString = "testing"
     get :index, { text: testString }
     assert_response :success
+    # The response type should be json, implicitly tested with parse
     assert_equal testString, JSON.parse(@response.body)["text"]
   end
 
-
-  test "should get new" do
-    get :new
+  test "post should receive string param and return plain text" do
+    testString = "testing"
+    post :create, { text: testString }
     assert_response :success
+    assert_equal testString, @response.body
   end
-
-  test "should get create" do
-    get :create
-    assert_response :success
-  end
-
-  # test "should get show" do
-  #   get :show
-  #   assert_response :success
-  # end
-
-  # test "should get edit" do
-  #   get :edit
-  #   assert_response :success
-  # end
-
-  # test "should get update" do
-  #   get :update
-  #   assert_response :success
-  # end
-  #
-  # test "should get destroy" do
-  #   get :destroy
-  #   assert_response :success
-  # end
-
 end
