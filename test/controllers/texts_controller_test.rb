@@ -15,4 +15,17 @@ class TextsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal testString, @response.body
   end
+
+  test "post receiving XHR text should return it back" do
+    testString = "testing"
+    post :create, { text: testString }, xhr: true
+    assert_response :success
+    assert_equal testString, @response.body
+  end
+
+  test "new page should have a text input and button to submit text" do
+    get :new
+    assert_select 'input'
+    assert_select 'button'
+  end
 end
