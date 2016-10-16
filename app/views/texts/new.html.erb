@@ -1,9 +1,9 @@
 <h1>Texts#new</h1>
 
 <div ng-controller="mainController as vm">
-  <%= form_tag "/texts" do %>
-    <%= text_field_tag "text", "", data: {"ng-model" => "inputText"} %>
-    <%= button_tag "DONE", type: "button", data: {"ng-click" => "vm.sendText(inputText, $event)"} %>
+  <%= form_for @text, :html => {:'ng-submit' => 'vm.sendText(inputText, $event)'} do |f| %>
+    <%= f.text_field :text, data: {"ng-model" => "inputText"} %>
+    <%= f.button "DONE", type: "button", data: {"ng-click" => "vm.sendText(inputText, $event)"} %>
     <h1>{{ vm.serverReturnText }}</h1>
   <% end %>
 </div>
