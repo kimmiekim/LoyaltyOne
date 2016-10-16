@@ -19,6 +19,18 @@ class TextsController < ApplicationController
     render plain: params[:text]
   end
 
+  def create_with_username
+    user_input = params[:text]
+    p params[:username]
+    username = params[:username]
+
+    Text.create(:text => user_input, :username => username)
+
+    # Return list of text's by that user
+
+    render json: Text.where(username: username).order(created_at: :desc)
+
+  end
   def show
   end
 
