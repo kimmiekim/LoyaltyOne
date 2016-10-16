@@ -28,4 +28,11 @@ class TextsControllerTest < ActionController::TestCase
     assert_select 'input'
     assert_select 'button'
   end
+
+  test "posting to create generates new model record" do
+    assert_difference('Text.count') do
+      post :create, params: { text: "hello" }
+    end
+  end
+
 end
