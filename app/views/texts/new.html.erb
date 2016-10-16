@@ -1,6 +1,9 @@
 <h1>Texts#new</h1>
 
-<%= form_tag "/texts" do %>
-  <%= text_field_tag "text" %>
-  <%= submit_tag "DONE " %>
-<% end %>
+<div ng-controller="mainController as vm">
+  <%= form_tag "/texts" do %>
+    <%= text_field_tag "text", "", data: {"ng-model" => "inputText"} %>
+    <%= button_tag "DONE", type: "button", data: {"ng-click" => "vm.sendText(inputText, $event)"} %>
+    <h1>{{ vm.serverReturnText }}</h1>
+  <% end %>
+</div>
