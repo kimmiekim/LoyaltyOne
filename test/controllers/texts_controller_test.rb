@@ -31,8 +31,24 @@ class TextsControllerTest < ActionController::TestCase
 
   test "posting to create generates new model record" do
     assert_difference('Text.count') do
-      post :create, params: { text: { text: "hello" } }
+      post :create, { text: "hello" }
+    end
+    p Text.last
+  end
+
+  test "posting to create_with_username generates new model record" do
+    assert_difference('Text.count') do
+      post :create_with_username, params: { text: "hello", username: "bobby" }
     end
   end
+
+  test "posting to create_with_username returns the list" do
+
+    # testString = "testing"
+    # post :create, { text: testString }
+    # assert_response :success
+    # assert_equal testString, @response.body
+  end
+
 
 end
