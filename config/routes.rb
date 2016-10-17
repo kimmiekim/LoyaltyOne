@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  get 'replies/create'
+
   root "texts#index"
   resources :texts
   post '/create', to: 'texts#create_with_username'
+  post '/reply/create', to: 'replies#create'
   # put 'texts' => 'texts#update'
 
   # The priority is based upon order of creation: first created -> highest priority.

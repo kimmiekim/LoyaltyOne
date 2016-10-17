@@ -21,6 +21,7 @@ class TextsControllerTest < ActionController::TestCase
     post :create, { text: testString }, xhr: true
     assert_response :success
     assert_equal testString, @response.body
+
   end
 
   test "new page should have a text input and button to submit text" do
@@ -30,9 +31,27 @@ class TextsControllerTest < ActionController::TestCase
   end
 
   test "posting to create generates new model record" do
+    testText = "hello"
     assert_difference('Text.count') do
-      post :create, params: { text: { text: "hello" } }
+      post :create, { text: testText }
     end
+
+    assert_equal testText, Text.last.text
+  end
+
+  test "posting to create_with_username generates new model record" do
+    testText = "hello"
+    assert_difference('Text.count') do
+      post :create_with_username, { username: username, text: testText }
+    end
+  end
+
+  test "render returns full list of texts" do
+    testString = "testing"
+    post :create, { text: testString }, xhr: true
+    assert_response :success
+    assert_equal testString, @response.body
+
   end
 
 end
