@@ -31,7 +31,7 @@ class TextsControllerTest < ActionController::TestCase
 
   test "posting to create generates new model record" do
     assert_difference('Text.count') do
-      post :create, params: { text: "hello" }
+      post :create, params: { text: { text: "hello" } }
     end
   end
 

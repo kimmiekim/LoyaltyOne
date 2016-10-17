@@ -15,13 +15,13 @@ class TextsController < ApplicationController
     # To make this safer, use text params and define in private function lke:
     # Text.create(text_params)
     # Additionally, you can test if creation was successful and return 500's
+    # p params[:text]
     Text.create(:text => params[:text])
     render plain: params[:text]
   end
 
   def create_with_username
     user_input = params[:text]
-    p params[:username]
     username = params[:username]
 
     Text.create(:text => user_input, :username => username)

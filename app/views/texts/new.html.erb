@@ -7,10 +7,10 @@
     <%= f.label :username %>:
     <%= f.text_field :text, data: {"ng-model" => "username" }%><br />
     <%= f.button "DONE", type: "button", data: {"ng-click" => "vm.sendText(text, username, $event)"} %>
-    <h1>{{ }}</h1>
+    <h1>{{ vm.latest.text }}</h1>
   <% end %>
 
-  <div ng-repeat="textObj in vm.serverReturn">
+  <div ng-repeat="textObj in vm.textList">
     <ul>
     <li>{{ textObj.text }}</li>
     <li>{{ textObj.username }}</li?
