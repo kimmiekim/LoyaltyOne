@@ -30,25 +30,32 @@ class TextsControllerTest < ActionController::TestCase
   end
 
   test "posting to create generates new model record" do
+    testText = "hello"
     assert_difference('Text.count') do
-      post :create, { text: "hello" }
+      post :create, { text: testText }
     end
-    p Text.last
+    assert_equal testText, Text.last.text
   end
 
   test "posting to create_with_username generates new model record" do
+    testText = "hello"
+    testUsername = "bobby"
+
     assert_difference('Text.count') do
-      post :create_with_username, params: { text: "hello", username: "bobby" }
+      post :create_with_username, { text: testText, username: testUsername }
     end
+
+    assert_equal testText, Text.last.text
+    assert_equal testUsername, Text.last.username
   end
 
-  test "posting to create_with_username returns the list" do
+  test "posting to create_with_username returns the proper list" do
+    #send post request
+    testText = "hello"
+    testUsername = "bobby"
+    post :create_with_username, {text: testText, username: testUsername}
 
-    # testString = "testing"
-    # post :create, { text: testString }
-    # assert_response :success
-    # assert_equal testString, @response.body
+    #parse the post response and check the post response has the right number of texts
+    assert_equal Text.where("username = '#{testUsername}'").count, JSON.parse(@response.body).length
   end
-
-
 end

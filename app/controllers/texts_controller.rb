@@ -15,7 +15,6 @@ class TextsController < ApplicationController
     # To make this safer, use text params and define in private function lke:
     # Text.create(text_params)
     # Additionally, you can test if creation was successful and return 500's
-    p params[:text]
     Text.create(:text => params[:text])
     render plain: params[:text]
   end
@@ -29,8 +28,8 @@ class TextsController < ApplicationController
     # Return list of text's by that user
 
     render json: Text.where(username: username).order(created_at: :desc)
-
   end
+
   def show
   end
 
