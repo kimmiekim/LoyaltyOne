@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'replies/create'
 
-  root "texts#index"
+  root "texts#new"
   resources :texts
   post '/create', to: 'texts#create_with_username'
   post '/reply/create', to: 'replies#create'

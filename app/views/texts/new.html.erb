@@ -4,7 +4,7 @@
   <form novalidate>
     Text: <input type="text" ng-model="text" /><br />
     Username: <input type="text" ng-model="username" /><br />
-    <input type="submit" ng-click="vm.sendText(text, username, $event)" />
+    <input type="submit" value="Done" ng-click="vm.sendText(text, username, $event)" />
     <h1>{{ vm.latest.text }}</h1>
   </form>
 
@@ -26,15 +26,12 @@
     <form novalidate>
       Text: <input type="text" ng-model="reply_text" /><br />
       Username: <input type="text" ng-model="reply_username" /><br />
-      <input type="submit" ng-click="vm.sendReply(reply_text, reply_username, textObj.id, $event)" />
+      <input type="submit" value="Reply" ng-click="vm.sendReply(reply_text, reply_username, textObj.id, $event)" />
     </form>
     </ul>
   </div>
 
-
 </div>
-
-
 
 <%= %>
 <ul>
