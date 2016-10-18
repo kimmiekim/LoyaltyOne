@@ -11,7 +11,7 @@ myApp.controller('mainController', [
       $event.preventDefault();
     }
 
-    vm.sendText = function (text, username, address, $event){
+    vm.sendText = function (text, username, $event){
       $event.preventDefault();
 
       $http({
@@ -20,12 +20,10 @@ myApp.controller('mainController', [
         // url: '/texts',
         url: '/create',
         // this sends data with username
-        data: { text: text, username: username, address: address }
+        data: { text: text, username: username }
       }).then(function successCallback(response) {
         vm.textList = response.data;
         vm.latest = vm.textList[0];
-        console.log(vm.textList);
-        console.log(vm.latest);
       }, function errorCallback(response) {
       });
     }

@@ -51,7 +51,6 @@ class TextsControllerTest < ActionController::TestCase
     post :create, { text: testString }, xhr: true
     assert_response :success
     assert_equal testString, @response.body
-
   end
 
 end
