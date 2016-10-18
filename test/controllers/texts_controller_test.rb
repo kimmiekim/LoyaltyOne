@@ -21,7 +21,6 @@ class TextsControllerTest < ActionController::TestCase
     post :create, { text: testString }, xhr: true
     assert_response :success
     assert_equal testString, @response.body
-
   end
 
   test "new page should have a text input and button to submit text" do
@@ -30,7 +29,7 @@ class TextsControllerTest < ActionController::TestCase
     assert_select 'button'
   end
 
-  test "posting to create generates new model record" do
+  test "posting to create generates new model record and has correct info" do
     testText = "hello"
     assert_difference('Text.count') do
       post :create, { text: testText }
@@ -39,19 +38,22 @@ class TextsControllerTest < ActionController::TestCase
     assert_equal testText, Text.last.text
   end
 
-  test "posting to create_with_username generates new model record" do
+  test "posting to create_with_username generates new model record and has correct content" do
     testText = "hello"
+    username = "bobby"
     assert_difference('Text.count') do
       post :create_with_username, { username: username, text: testText }
     end
+
+    assert_equal testText, Text.last.text
+    assert_equal username, Text.last.username
   end
 
-  test "render returns full list of texts" do
-    testString = "testing"
-    post :create, { text: testString }, xhr: true
-    assert_response :success
-    assert_equal testString, @response.body
-
+  test "posting to create_with_username gives back full list of texts" do
+    username = "bobby"
+    post :create_with_username, { :text => "test text", :username => username }
+    
+    assert_equal Text.where("username = '#{username}'").count, JSON.parse(@response.body).length
   end
 
 end
