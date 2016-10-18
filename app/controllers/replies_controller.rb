@@ -7,7 +7,8 @@ class RepliesController < ApplicationController
     # build the reply
     user_input = params[:reply_text]
     username = params[:username]
-    text.replies.build(reply_text: user_input, username: username)
+    reply = text.replies.build(reply_text: user_input, username: username)
+    reply.save
 
     # Return full list of json replies related to text
     render json: text.replies

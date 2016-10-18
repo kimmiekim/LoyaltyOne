@@ -1,4 +1,4 @@
-class TextsController < ApplicationController
+  class TextsController < ApplicationController
   # GET /texts
   def index
     # /texts?text=sometext

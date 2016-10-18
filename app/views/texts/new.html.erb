@@ -20,14 +20,17 @@
   <% end %>
 
   <div ng-repeat="textObj in vm.textList">
-    <ul>
-    <li>{{ textObj.text }}</li>
-    <li>{{ textObj.username }}</li>
+    {{ textObj.text }}
+    {{ textObj.username }}
     <form novalidate>
-      Text: <input type="text" ng-model="reply_text" /><br />
-      Username: <input type="text" ng-model="reply_username" /><br />
-      <input type="submit" value="Reply" ng-click="vm.sendReply(reply_text, reply_username, textObj.id, $event)" />
+      Text: <input type="text" ng-model="textObj.reply_text" /><br />
+      Username: <input type="text" ng-model="textObj.reply_username" /><br />
+      <input type="submit" value="Reply" ng-click="vm.sendReply(textObj, $index, $event)" />
     </form>
+    <ul>
+      <li ng-repeat="reply in textObj.replies">
+	{{ reply.username }} : {{ reply.reply_text }}
+	</li>
     </ul>
   </div>
 
