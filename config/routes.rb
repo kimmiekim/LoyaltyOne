@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/create', to: 'texts#create_with_username'
   post '/reply/create', to: 'replies#create'
   # put 'texts' => 'texts#update'
+  get '/botest', to: 'texts#botest'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

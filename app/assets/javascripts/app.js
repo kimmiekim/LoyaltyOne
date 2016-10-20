@@ -21,7 +21,10 @@ myApp.controller('mainController', [
         // this sends data with username
         data: { text: text, username: username, address: address }
       }).then(function successCallback(response) {
-        vm.textList = response.data;
+        vm.textList = response.data.texts;
+debugger;
+        vm.weatherData = response.data.weather_data;
+        console.log(vm.weatherData);
         vm.latest = vm.textList[0];
       }, function errorCallback(response) {
       });
