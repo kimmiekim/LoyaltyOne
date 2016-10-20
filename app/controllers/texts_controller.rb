@@ -27,10 +27,9 @@ class TextsController < ApplicationController
     Text.create(:text => user_input, :username => username, :address => address)
 
     # Return list of text's by that user
-
     render json: Text.where(username: username).order(created_at: :desc)
-
   end
+
   def show
   end
 

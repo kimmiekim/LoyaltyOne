@@ -1,15 +1,6 @@
 
 <div class="container">
   <div ng-controller="mainController as vm">
-    <!-- <form novalidate>
-      Text: <input type="text" ng-model="text" /><br />
-      Username: <input type="text" ng-model="username" /><br />
-      Address: <input type="text" ng-model="address"><br />
-
-      <input type="submit" value="Done" ng-click="vm.sendText(text, username, address, $event)" />
-      <h1>{{ vm.latest.text }}</h1>
-    </form> -->
-
     <%= form_for @text, :html => {:'ng-submit' => 'vm.sendText(text, username, address, $event)'} do |f| %>
       <%= f.label :text %>:
       <%= f.text_field :text, class: "form-control", data: {"ng-model" => "text"} %><br />
@@ -19,33 +10,34 @@
       <%= f.text_field :text, class: "form-control", data: {"ng-model" => "address"}%><br />
       <%= f.button "DONE", type: "button", class: "btn btn-primary", data: {"ng-click" => "vm.sendText(text, username, address, $event)"} %>
       <h1>{{ vm.latest.text }}</h1>
+
+      <div ng-repeat="textObj in vm.textList">
+        <ul>
+        <!-- <li>{{ textObj.text }}</li>
+        <li>{{ textObj.username }}</li>
+        <li>Latitude:{{ textObj.latitude}}, Longitude: {{ textObj.longitude}}</li>
+        <form novalidate>
+          Text: <input type="text" ng-model="reply_text" /><br />
+          Username: <input type="text" ng-model="reply_username" /><br />
+          <input type="submit" value="Reply" ng-click="vm.sendReply(reply_text, reply_username, textObj.id, $event)" />
+        </form>
+        </ul> -->
+        <p>{{ textObj.text }}</p>
+        <p>{{ textObj.username }}</p>
+        <p>Latitude:{{ textObj.latitude}}, longitude:{{ textObj.longitude }}</p>
+
+        <%= f.fields_for :replies, :html => {:'ng-submit' => 'vm.sendReply(reply_text, username, $event)'} do |fr| %>
+          <%= fr.label :reply %>:
+          <%= fr.text_field :reply_text, class: "form-control", data: {"ng-model" => "reply_text"}%><br />
+          <%= fr.label :username%>
+          <%= fr.text_field :username, class: "form-control", data: {"ng-model" => "username"}%><br />
+          <%= fr.button "REPLY", type: "button", class: "btn btn-primary", data: {"ng-click" => "vm.sendReply(reply_text, username, $event)"} %>
+        <!-- End Fields for Reply -->
+        <% end %>
+
+      </div>
+
+    <!-- End Main Form -->
     <% end %>
-
-
-    <div ng-repeat="textObj in vm.textList">
-      <ul>
-      <!-- <li>{{ textObj.text }}</li>
-      <li>{{ textObj.username }}</li>
-      <li>Latitude:{{ textObj.latitude}}, Longitude: {{ textObj.longitude}}</li>
-      <form novalidate>
-        Text: <input type="text" ng-model="reply_text" /><br />
-        Username: <input type="text" ng-model="reply_username" /><br />
-        <input type="submit" value="Reply" ng-click="vm.sendReply(reply_text, reply_username, textObj.id, $event)" />
-      </form>
-      </ul> -->
-      <p>{{ textObj.text }}</p>
-      <p>{{ textObj.username }}</p>
-      <p>Latitude:{{ textObj.latitude}}, longitude:{{ textObj.longitude }}</p>
-
-      <%= form_for @text, :html => {:'ng-submit' => 'vm.sendReply(reply_text, username, $event)'} do |f| %>
-        <%= f.label :reply %>:
-        <%= f.text_field :text, class: "form-control", data: {"ng-model" => "reply_text"}%><br />
-        <%= f.label :username%>
-        <%= f.text_field :text, class: "form-control", data: {"ng-model" => "username"}%><br />
-        <%= f.button "REPLY", type: "button", class: "btn btn-primary", data: {"ng-click" => "vm.sendReply(reply_text, username, $event)"} %>
-      <% end %>
-    </div>
-
   </div>
-
 </div>
