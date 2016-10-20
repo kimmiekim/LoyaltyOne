@@ -15,16 +15,16 @@ class TextsController < ApplicationController
     # To make this safer, use text params and define in private function lke:
     # Text.create(text_params)
     # Additionally, you can test if creation was successful and return 500's
-    # p params[:text]
-    Text.create(:text => params[:text])
-    render plain: params[:text]
+    text = Text.create(:text => params[:text], :address => params[:address])
+    render plain: text
   end
 
   def create_with_username
     user_input = params[:text]
     username = params[:username]
+    address = params[:address]
 
-    Text.create(:text => user_input, :username => username)
+    Text.create(:text => user_input, :username => username, :address => address)
 
     # Return list of text's by that user
 
