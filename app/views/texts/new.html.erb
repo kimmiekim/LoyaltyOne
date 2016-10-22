@@ -12,8 +12,8 @@
       <h1 ng-show="vm.latest.text">
         Text: {{ vm.latest.text }}
       </h1>
-      <h3 ng-show="vm.weatherData.main.temp">
-        Temp: {{ vm.weatherData.main.temp }}
+      <h3 ng-show="vm.latest.temp">
+        Temp: {{ vm.latest.temp }}
       </h3>
       <h3 ng-show="vm.latest.latitude">
         Latitude: {{ vm.latest.latitude }}
@@ -23,22 +23,13 @@
       </h3>
 
       <div ng-repeat="textObj in vm.textList">
-        <ul>
-        <!-- <li>{{ textObj.text }}</li>
-        <li>{{ textObj.username }}</li>
-        <li>Latitude:{{ textObj.latitude}}, Longitude: {{ textObj.longitude}}</li>
-        <form novalidate>
-          Text: <input type="text" ng-model="reply_text" /><br />
-          Username: <input type="text" ng-model="reply_username" /><br />
-          <input type="submit" value="Reply" ng-click="vm.sendReply(reply_text, reply_username, textObj.id, $event)" />
-        </form>
-        </ul> -->
         <div class="row">
           <div class="col-md-12">
             <div class="panel panel-default">
               <p class = "panel-heading">{{ textObj.text }}</p>
               <p class = "panel-title">{{ textObj.username }}</p>
               <p class = "panel-title">Latitude:{{ textObj.latitude }}, longitude:{{ textObj.longitude }} </p>
+              <p class = "panel-title">Temperature:{{ textObj.temp }}</p>
             </div>
           </div>
         </div>

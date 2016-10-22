@@ -14,15 +14,24 @@ class TextsController < ApplicationController
   end
 
   # Doing the weather API call through rails instead of the front end for security
-  def getWeatherData(city=nil)
+  def getWeatherData(city=nil, text=nil)
     city ||= params[:city]
-    json_weather_data = Net::HTTP.get(URI.parse("http://api.openweathermap.org/data/2.5/weather?q=#{city}&apiKey=02be9f4871a8fabfb2e1ffbdfd847370"))
+    json_weather_data = Net::HTTP.get(URI.parse(
+      "http://api.openweathermap.org/data/2.5/weather?q=#{city}&units=metric&apiKey=02be9f4871a8fabfb2e1ffbdfd847370"
+    ))
     weather_data = JSON.parse(json_weather_data)
 
-    WeatherInfo.create(
+    weather_info_hash = {
       :city => weather_data["name"],
       :data => json_weather_data
-    )
+    }
+
+    if text.blank?
+      WeatherInfo.create(weather_info_hash)
+    else
+      text.build_weather_info(weather_info_hash).save
+    end
+
     #render json: json_weather_data
     return json_weather_data
   end
@@ -41,15 +50,17 @@ class TextsController < ApplicationController
     username = params[:username]
     address = params[:address]
 
-    Text.create(:text => user_input, :username => username, :address => address)
+    text = Text.create(:text => user_input, :username => username, :address => address)
 
     # Assume that address is a given city input
-    weather_data = getWeatherData(address)
+    weather_data = getWeatherData(address, text)
 
     # Return list of text's by that user
-    render json: {
-      :texts => Text.where(username: username).order(created_at: :desc),
-      :weather_data => weather_data
+    texts_by_user = Text.where(username: username).order(created_at: :desc)
+    render json: texts_by_user.map { |text|
+      t = text.attributes
+      t[:temp] = JSON.parse(text.weather_info.data)["main"]["temp"]
+      t
     }
   end
 
@@ -64,5 +75,11 @@ class TextsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def kel_to_cel(kel)
+    return kel - 273.15
   end
 end

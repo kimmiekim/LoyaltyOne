@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020023014) do
+ActiveRecord::Schema.define(version: 20161022222157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,10 @@ ActiveRecord::Schema.define(version: 20161020023014) do
     t.string   "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "text_id"
   end
 
+  add_index "weather_infos", ["text_id"], name: "index_weather_infos_on_text_id", using: :btree
+
+  add_foreign_key "weather_infos", "texts"
 end
