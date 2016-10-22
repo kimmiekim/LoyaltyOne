@@ -22,8 +22,7 @@ myApp.controller('mainController', [
         data: { text: text, username: username, address: address }
       }).then(function successCallback(response) {
         vm.textList = response.data.texts;
-debugger;
-        vm.weatherData = response.data.weather_data;
+        vm.weatherData = JSON.parse(response.data.weather_data);
         console.log(vm.weatherData);
         vm.latest = vm.textList[0];
       }, function errorCallback(response) {
@@ -40,7 +39,7 @@ debugger;
         method: 'POST',
         // this sends the data to texts path without username
         url: '/reply/create',
-        data: { 
+        data: {
           reply_text: text.reply_text,
           username: text.reply_username,
           text_id: text.id }
@@ -53,9 +52,21 @@ debugger;
         // Clear the form
         vm.textList[text_index].reply_text = undefined;
         vm.textList[text_index].reply_username = undefined;
-        
+
       }, function errorCallback(response) {
       });
     }
   }
 ]);
+
+myApp.controller('weatherController', [
+  '$scope',
+  '$resource',
+  'cityService',
+  function ($scope, $resource, cityService) {
+    $scope.city = cityService.city;
+    $scope.weatherAPI = $resource("api.openweathermap.org/data/2.5/weather?",
+                                  { callback: "JSON_CALLBACK" },
+                                  { get: { method: "JSONP" } });
+    $scope.weatherResult = $scope.weatherAPI.get({ q: $scope.city, cnt: 1 });
+  }]);

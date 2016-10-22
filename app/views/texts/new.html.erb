@@ -9,7 +9,18 @@
       <%= f.label :address %>:
       <%= f.text_field :text, class: "form-control", data: {"ng-model" => "address"}%><br />
       <%= f.button "DONE", type: "button", class: "btn btn-primary", data: {"ng-click" => "vm.sendText(text, username, address, $event)"} %>
-      <h1>{{ vm.latest.text }}</h1>
+      <h1 ng-show="vm.latest.text">
+        Text: {{ vm.latest.text }}
+      </h1>
+      <h3 ng-show="vm.weatherData.main.temp">
+        Temp: {{ vm.weatherData.main.temp }}
+      </h3>
+      <h3 ng-show="vm.latest.latitude">
+        Latitude: {{ vm.latest.latitude }}
+      </h3>
+      <h3 ng-show="vm.latest.latitude">
+        Longitude: {{ vm.latest.longitude }}
+      </h3>
 
       <div ng-repeat="textObj in vm.textList">
         <ul>
@@ -22,24 +33,45 @@
           <input type="submit" value="Reply" ng-click="vm.sendReply(reply_text, reply_username, textObj.id, $event)" />
         </form>
         </ul> -->
-        <p>{{ textObj.text }}</p>
-        <p>{{ textObj.username }}</p>
-        <p>Latitude:{{ textObj.latitude }}, longitude:{{ textObj.longitude }}</p>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+              <p class = "panel-heading">{{ textObj.text }}</p>
+              <p class = "panel-title">{{ textObj.username }}</p>
+              <p class = "panel-title">Latitude:{{ textObj.latitude }}, longitude:{{ textObj.longitude }} </p>
+            </div>
+          </div>
+        </div>
 
-        <%= f.fields_for :replies, :html => {:'ng-submit' => 'vm.sendReply(textObj, username, $event)'} do |fr| %>
-          <%= fr.label :reply_text %>:
-          <%= fr.text_field :reply_text, class: "form-control", data: {"ng-model" => "textObj.reply_text"}%><br />
-          <%= fr.label :username%>
-          <%= fr.text_field :username, class: "form-control", data: {"ng-model" => "textObj.reply_username"}%><br />
-          <%#= fr.hidden_field_tag :text, data: {"ng-model" => "textObj.id"} %>
-          <%= fr.button "REPLY", type: "button", class: "btn btn-primary", data: {"ng-click" => "vm.sendReply(textObj, $index, $event)"} %>
-          <ul>
-            <li ng-repeat="reply in textObj.replies">
-              {{ reply.username }}: {{ reply.reply_text }}
-            </li>
-          </ul>
-        <!-- End Fields for Reply -->
-        <% end %>
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="panel panel-default">
+              <%= f.fields_for :replies, :html => {:'ng-submit' => 'vm.sendReply(textObj, username, $event)'} do |fr| %>
+                <div class="panel-heading">
+                  <%= fr.label :reply_text %>:
+                </div>
+                <div class="panel-title">
+                  <%= fr.text_field :reply_text, class: "form-control", data: {"ng-model" => "textObj.reply_text"}%><br />
+                </div>
+                <div class="panel-heading">
+                  <%= fr.label :username%>
+                </div>
+                <div class="panel-title">
+                  <p class="text-right"><%= fr.text_field :username, class: "form-control", data: {"ng-model" => "textObj.reply_username"}%></p>
+                  <%#= fr.hidden_field_tag :text, data: {"ng-model" => "textObj.id"} %>
+                </div>
+                <%= fr.button "REPLY", type: "button", class: "btn btn-primary", data: {"ng-click" => "vm.sendReply(textObj, $index, $event)"} %>
+                <ul>
+                  <li ng-repeat="reply in textObj.replies">
+                    {{ reply.username }}: {{ reply.reply_text }}
+                  </li>
+                </ul>
+              <!-- End Fields for Reply -->
+              <% end %>
+            </div>
+          </div>
+        </div>
 
       </div>
 

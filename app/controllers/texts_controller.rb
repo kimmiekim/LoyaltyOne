@@ -13,13 +13,14 @@ class TextsController < ApplicationController
     @text = Text.new
   end
 
-  def getWeatherData(city)
+  # Doing the weather API call through rails instead of the front end for security
+  def getWeatherData(city=nil)
+    city ||= params[:city]
     json_weather_data = Net::HTTP.get(URI.parse("http://api.openweathermap.org/data/2.5/weather?q=#{city}&apiKey=02be9f4871a8fabfb2e1ffbdfd847370"))
     weather_data = JSON.parse(json_weather_data)
-    p weather_data
 
     WeatherInfo.create(
-      :city => weather_data[:name],
+      :city => weather_data["name"],
       :data => json_weather_data
     )
     #render json: json_weather_data
