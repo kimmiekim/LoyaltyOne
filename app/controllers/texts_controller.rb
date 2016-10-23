@@ -15,8 +15,7 @@ class TextsController < ApplicationController
 
   # POST /texts
   def create
-    # To make this safer, use text params and define in private function lke:
-    # Text.create(text_params)
+    # To make this safer, use text params and define in private function
     # Additionally, you can test if creation was successful and return 500's
     text = Text.create(:text => params[:text], :address => params[:address])
     render json: text
