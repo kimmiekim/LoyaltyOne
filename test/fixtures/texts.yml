@@ -3,7 +3,9 @@
 one:
   text: MyText1
   username: Bobby
+  address: Toronto
 
 two:
   text: MyText2
   username: Bobby
+  address: LA

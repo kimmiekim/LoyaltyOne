@@ -13,36 +13,13 @@ class TextsController < ApplicationController
     @text = Text.new
   end
 
-  # Doing the weather API call through rails instead of the front end for security
-  def getWeatherData(city=nil, text=nil)
-    city ||= params[:city]
-    json_weather_data = Net::HTTP.get(URI.parse(
-      "http://api.openweathermap.org/data/2.5/weather?q=#{city}&units=metric&apiKey=02be9f4871a8fabfb2e1ffbdfd847370"
-    ))
-    weather_data = JSON.parse(json_weather_data)
-
-    weather_info_hash = {
-      :city => weather_data["name"],
-      :data => json_weather_data
-    }
-
-    if text.blank?
-      WeatherInfo.create(weather_info_hash)
-    else
-      text.build_weather_info(weather_info_hash).save
-    end
-
-    #render json: json_weather_data
-    return json_weather_data
-  end
-
   # POST /texts
   def create
     # To make this safer, use text params and define in private function lke:
     # Text.create(text_params)
     # Additionally, you can test if creation was successful and return 500's
     text = Text.create(:text => params[:text], :address => params[:address])
-    render plain: text
+    render json: text
   end
 
   def create_with_username
@@ -64,17 +41,27 @@ class TextsController < ApplicationController
     }
   end
 
-  def show
-  end
+  # Doing the weather API call through rails instead of the front end for security
+  def getWeatherData(city=nil, text=nil)
+    city ||= params[:city]
+    json_weather_data = Net::HTTP.get(URI.parse(
+      "http://api.openweathermap.org/data/2.5/weather?q=#{city}&units=metric&apiKey=02be9f4871a8fabfb2e1ffbdfd847370"
+    ))
+    weather_data = JSON.parse(json_weather_data)
 
-  def edit
-  end
+    weather_info_hash = {
+      :city => weather_data["name"],
+      :data => json_weather_data
+    }
 
-  # PUT /texts
-  def update
-  end
+    if text.blank?
+      WeatherInfo.create(weather_info_hash)
+    else
+      text.build_weather_info(weather_info_hash).save
+    end
 
-  def destroy
+    #render json: json_weather_data
+    return json_weather_data
   end
 
   private

@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  city: MyString
-  data: MyString
+  city: MyCity1
+  data: "{\"main\": {\"temp\": \"23\"}}"
+  text: one
 
 two:
-  city: MyString
-  data: MyString
+  city: MyCity2
+  data: "{\"main\": {\"temp\": \"23\"}}"
+  text: two
