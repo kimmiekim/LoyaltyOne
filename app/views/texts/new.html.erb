@@ -1,4 +1,10 @@
 
+<div class="background">
+<div class="title">
+  <h1>Write something!</h1>
+  <h2>Find out your current temperature!</h2>
+</div>
+
 <div class="container">
   <div ng-controller="mainController as vm">
     <%= form_for @text, :html => {:'ng-submit' => 'vm.sendText(text, username, address, $event)'} do |f| %>
@@ -11,6 +17,7 @@
       <%= f.button "DONE", type: "button", class: "btn btn-primary", data: {"ng-click" => "vm.sendText(text, username, address, $event)"} %>
       <br />
       <br />
+
       <!-- <blockquote ng-show="vm.latest">
         <h1 ng-show="vm.latest.text" style="margin-top: 0">
           {{ vm.latest.text }}
@@ -31,8 +38,8 @@
 
       <div ng-repeat="textObj in vm.textList">
             <div class="panel">
-              <blockquote style="margin: 15px;">
-              <h2 style="margin-top: 0;">{{ textObj.text }}</h2>
+              <blockquote>
+              <h2>{{ textObj.text }}</h2>
               <footer>Username:{{ textObj.username }}</footer>
               <footer>Latitude:{{ textObj.latitude }}, longitude:{{ textObj.longitude }} </footer>
               <footer>Temperature:{{ textObj.temp }}</footer>
@@ -57,7 +64,7 @@
                 </div>
                 <%= fr.button "REPLY",
                       type: "button",
-                      class: "btn btn-primary",
+                      class: "btn btn-default",
                       style: "margin: 15px;",
                       data: {"ng-click" => "vm.sendReply(textObj, $index, $event)"} %>
                 <ul>
@@ -71,8 +78,8 @@
           </form>
 
       </div>
-
     <!-- End Main Form -->
     <% end %>
   </div>
+</div>
 </div>

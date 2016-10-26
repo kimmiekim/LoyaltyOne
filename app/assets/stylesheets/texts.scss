@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$blue: #148ecf;
+$light_blue: #61c0f0;
+$dark_grey: #5e5e63;
+$form_field: #ddf1f9;
+$button: #0a6fb3;
+
+
 *,
 *:after,
 *:before {
@@ -11,4 +18,63 @@
 html, body, input, select, textarea
 {
     font-size: 1.05em;
+
+
+}
+
+.navbar {
+  margin-bottom:0;
+  background-color: $blue;
+
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+  li>a {
+    color: white;
+  }
+}
+
+.title {
+  text-align: center;
+  color: $dark_grey;
+  h1{
+    margin-top: 0;
+    padding-top: 5%;
+  }
+
+}
+
+blockquote {
+  margin: 15px;
+  h2{
+    margin-top: 0;
+  }
+}
+
+.background {
+  background-image: url('sky_image.jpg');
+  background-size: cover;
+  height: 500px;
+
+}
+
+form {
+
+  label{
+    color: $dark_grey;
+  }
+}
+
+.form-control {
+  background-color: $form_field;
+
+}
+
+.btn-primary {
+  background-color: $button;
+}
+
+.panel {
+  margin-top: 10%;
 }
