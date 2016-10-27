@@ -10,9 +10,9 @@
     <%= form_for @text, :html => {:'ng-submit' => 'vm.sendText(text, username, address, $event)'} do |f| %>
       <%= f.label :text %>:
       <%= f.text_field :text, class: "form-control", data: {"ng-model" => "text"} %><br />
-      <%= f.label :username %>:
+      <%= f.label :name %>:
       <%= f.text_field :text, class: "form-control", data: {"ng-model" => "username"}%><br />
-      <%= f.label :address %>:
+      <%= f.label :city %>:
       <%= f.text_field :text, class: "form-control", data: {"ng-model" => "address"}%><br />
       <%= f.button "DONE", type: "button", class: "btn btn-primary", data: {"ng-click" => "vm.sendText(text, username, address, $event)"} %>
       <br />
@@ -22,9 +22,9 @@
             <div class="panel">
               <blockquote>
               <h2>{{ textObj.text }}</h2>
-              <footer>Username:{{ textObj.username }}</footer>
-              <footer>Latitude:{{ textObj.latitude }}, longitude:{{ textObj.longitude }} </footer>
-              <footer>Temperature:{{ textObj.temp }}</footer>
+              <footer>Username: {{ textObj.username }}</footer>
+              <footer>Latitude: {{ textObj.latitude }}, longitude: {{ textObj.longitude }} </footer>
+              <footer>Temperature: {{ textObj.temp }} (°C)</footer>
             </blockquote>
 
           <form class="form-horizontal">
