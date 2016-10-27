@@ -4,11 +4,20 @@ return user's latitude, logitude and weather data based on user's current city.
 
 Built on Rails with Angular1 and Bootstrap. 
 
-To view it locally: 
 
-``$git clone``
-``$bundle install``
-``$rails s``
+##Instructions to open the app on your local: 
+
+```$git clone``` 
+
+```$cd LoyaltyOne```
+
+```$bundle install``` 
+
+go in to LoyaltyOne folder, and run the server 
+
+```$rails s```
+
+
 
 You can also find the live site on:
 https://loyaltyone.herokuapp.com/
