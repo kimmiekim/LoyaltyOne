@@ -59,7 +59,6 @@ class TextsController < ApplicationController
       text.build_weather_info(weather_info_hash).save
     end
 
-    #render json: json_weather_data
     return json_weather_data
   end
 
