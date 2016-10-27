@@ -5,17 +5,17 @@ return user's latitude, logitude and weather data based on user's current city.
 Built on Rails with Angular1 and Bootstrap. 
 
 
-##Instructions to open the app on your local: 
+Instructions to open the app on your local: 
 
-```$git clone``` 
+    $git clone
 
-```$cd LoyaltyOne```
+    $cd LoyaltyOne
 
-```$bundle install``` 
+    $bundle install
 
 go in to LoyaltyOne folder, and run the server 
 
-```$rails s```
+    $rails s
 
 
 
