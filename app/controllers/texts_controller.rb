@@ -4,7 +4,6 @@ require "net/http"
 class TextsController < ApplicationController
   # GET /texts
   def index
-    # /texts?text=sometext
       render json: { text: params[:text] }
   end
 
