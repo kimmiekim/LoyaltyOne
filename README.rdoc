@@ -6,9 +6,9 @@ Built on Rails with Angular1 and Bootstrap.
 
 To view it locally: 
 
-```$git clone```
-```bundle install```
-```rails s```
+``$git clone``
+``$bundle install``
+``$rails s``
 
 You can also find the live site on:
 https://loyaltyone.herokuapp.com/
