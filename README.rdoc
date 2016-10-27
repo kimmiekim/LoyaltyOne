@@ -1,6 +1,6 @@
-Simple Web application that enables a user to write a post, 
-make a reply to a post and 
-return user's latitude, logitude and weather data based on user's current city.
+Simple Web application that enables users to write posts, 
+make replies to posts and 
+returns user's latitude, logitude and weather data based on user's current city.
 
 Built on Rails with Angular1 and Bootstrap. 
 
