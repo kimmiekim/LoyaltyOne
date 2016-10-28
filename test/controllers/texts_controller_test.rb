@@ -76,7 +76,7 @@ class TextsControllerTest < ActionController::TestCase
       :address => "Toronto"
     }
 
-    assert_equal Text.count, JSON.parse(@response.body).length
+    assert_equal Text.where("username = '#{username}'").count, JSON.parse(@response.body).length
 
     JSON.parse(@response.body).each do |resp_text|
       assert_equal username, resp_text["username"]

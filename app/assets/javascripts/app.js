@@ -7,10 +7,6 @@ myApp.controller('mainController', [
   ){
     var vm = this;
 
-    vm.preventSubmit = function ($event){
-      $event.preventDefault();
-    }
-
     vm.sendText = function (text, username, address, $event){
       $event.preventDefault();
 
@@ -55,15 +51,3 @@ myApp.controller('mainController', [
     }
   }
 ]);
-
-myApp.controller('weatherController', [
-  '$scope',
-  '$resource',
-  'cityService',
-  function ($scope, $resource, cityService) {
-    $scope.city = cityService.city;
-    $scope.weatherAPI = $resource("api.openweathermap.org/data/2.5/weather?",
-                                  { callback: "JSON_CALLBACK" },
-                                  { get: { method: "JSONP" } });
-    $scope.weatherResult = $scope.weatherAPI.get({ q: $scope.city, cnt: 1 });
-  }]);
