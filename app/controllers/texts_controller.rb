@@ -47,6 +47,7 @@ class TextsController < ApplicationController
     ))
     weather_data = JSON.parse(json_weather_data)
 
+
     weather_info_hash = {
       :city => weather_data["name"],
       :data => json_weather_data
